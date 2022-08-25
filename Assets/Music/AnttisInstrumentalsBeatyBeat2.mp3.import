@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/AnttisInstrumentalsBeatyBeat2.mp3-36f5c5299aa373e7fb7add0a38f97830.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/AnttisInstrumentalsBeatyBeat2.mp3"
+dest_files=[ "res://.import/AnttisInstrumentalsBeatyBeat2.mp3-36f5c5299aa373e7fb7add0a38f97830.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
