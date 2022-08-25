@@ -1,2 +1,2 @@
 # BlockHit
- Adodge game with Godot Engine and C#
+ A dodge game made with the Godot Engine and C#
