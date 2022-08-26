@@ -8,4 +8,9 @@ public class Main : Node
     VisualServer.SetDefaultClearColor(Colors.Black);
   }
 
+  public Player GetPlayer()
+  {
+    return GetNode<Player>("Basket/Player");
+  }
+
 }

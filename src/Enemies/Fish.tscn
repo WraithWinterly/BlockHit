@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/ObjectBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Enemies/Fish.wav" type="AudioStream" id=2]
+
+[node name="Fish" type="Node2D"]
+
+[node name="ObjectBase" parent="." instance=ExtResource( 1 )]
+gravity_scale = 0.0
+color = Color( 1, 0, 0, 1 )
+
+[node name="Sound" parent="ObjectBase" index="3"]
+stream = ExtResource( 2 )
+pitch_scale = 1.07
+
+[editable path="ObjectBase"]

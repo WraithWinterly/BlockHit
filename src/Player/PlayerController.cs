@@ -9,6 +9,7 @@ public class PlayerController : KinematicBody2D
 
   private Player _player;
   private Vector2 _linearVelocity;
+  private AnimationPlayer _animationPlayer;
 
   private float _currentGravity;
   private float _jumpBufferFrames;
@@ -25,7 +26,7 @@ public class PlayerController : KinematicBody2D
   {
     base._Ready();
     _player = Owner as Player;
-
+    _animationPlayer = GetNode<AnimationPlayer>("Sprite/AnimationPlayer");
     _jumpBufferFrames = MaxJumpBufferFrames;
     _currentGravity = Gravity;
   }
@@ -48,6 +49,7 @@ public class PlayerController : KinematicBody2D
         _canChangeDir = true;
         if (_resetPlayer) return;
         _player.EmitSignal(nameof(Player.Scored));
+        _animationPlayer.Play(_gravityDir == 1 ? "ScoreDown" : "ScoreUp");
       }
     }
 
