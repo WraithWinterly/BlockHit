@@ -10,6 +10,9 @@ public class Player : Node2D
 
   [Signal] public delegate void Scored();
 
+  private Events _events;
+  private PlayerController _playerController;
+
   private AudioStreamPlayer _scoreSound;
   private AudioStreamPlayer _deathSound;
   private AudioStreamPlayer _hitSound;
@@ -23,14 +26,17 @@ public class Player : Node2D
 
   public override void _Ready()
   {
-    _scoreLight = GetNode<ScoreLight>("%ScoreLight");
-    Connect(nameof(Scored), this, nameof(OnScored));
+    _events = GetTree().Root.GetNode<Events>("Main/Events");
+    _playerController = GetNode<PlayerController>("KinematicBody2D");
 
+    _scoreLight = GetNode<ScoreLight>("%ScoreLight");
     _scoreSound = GetNode<AudioStreamPlayer>("ScoreSound");
     _deathSound = GetNode<AudioStreamPlayer>("DeathSound");
     _hitSound = GetNode<AudioStreamPlayer>("HurtSound");
 
     _area = GetNode<Area2D>("KinematicBody2D/Area2D");
+
+    Connect(nameof(Scored), this, nameof(OnScored));
     _area.Connect("body_entered", this, nameof(OnAreaBodyEntered));
 
     _health = MaxHealth;
@@ -40,19 +46,20 @@ public class Player : Node2D
   {
     _health -= amount;
     _health = _health < 0 ? 0 : _health;
+
     if (_health == 0)
     {
-      GetTree().Root.GetNode<Events>("Main/Events").EmitSignal(nameof(Events.PlayerDied));
-      var k = GetNode<KinematicBody2D>("KinematicBody2D");
-      k.SetPhysicsProcess(false);
-      k.SetProcess(false);
-      k.SetProcessInput(false);
-      k.GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
-      _area.SetDeferred("monitoring", false);
-      _area.SetDeferred("monitorable", false);
-      GetNode<AnimationPlayer>("KinematicBody2D/AnimationPlayer").Play("Death");
-      _deathSound.Play();
+      Die();
     }
+  }
+
+  private void Die()
+  {
+    _events.EmitSignal(nameof(Events.PlayerDied));
+
+    _playerController.Die();
+
+    _deathSound.Play();
   }
 
   public void AddHealth(int amount)

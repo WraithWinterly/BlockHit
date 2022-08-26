@@ -3,17 +3,17 @@ using System;
 
 public class ScoreLight : Node2D
 {
-  private AnimationPlayer _animationPlayer;
+  private AnimationPlayer _anim;
 
   public override void _Ready()
   {
     base._Ready();
-    _animationPlayer = GetNode<AnimationPlayer>("Sprite/AnimationPlayer");
+    _anim = GetNode<AnimationPlayer>("Sprite/AnimationPlayer");
   }
 
   public void Play()
   {
-    _animationPlayer.Stop();
-    _animationPlayer.Play("Flash");
+    _anim.Stop();
+    _anim.Play("Flash");
   }
 }

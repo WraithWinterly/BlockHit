@@ -3,40 +3,41 @@ using System;
 
 public class FadePlayer : CanvasLayer
 {
-  [Signal] public delegate void Faded();
+  private Events _events;
 
-  private AnimationPlayer _animationPlayer;
+  private AnimationPlayer _anim;
 
   public override void _Ready()
   {
     base._Ready();
-    _animationPlayer = GetNode<AnimationPlayer>("TextureRect/AnimationPlayer");
-    _animationPlayer.Connect("animation_finished", this, nameof(OnAnimationFinished));
+    _events = GetTree().Root.GetNode<Events>("Main/Events");
+    _anim = GetNode<AnimationPlayer>("TextureRect/AnimationPlayer");
+    _anim.Connect("animation_finished", this, nameof(OnAnimationFinished));
     InitialTransition();
     Show();
-    GetTree().Root.GetNode<Events>("Main/Events").Connect(nameof(Events.GameResetTriggered), this, nameof(Transition));
+    _events.Connect(nameof(Events.LevelReset), this, nameof(Transition));
   }
 
   public async void Transition()
   {
     GetTree().Paused = true;
-    _animationPlayer.PlayBackwards("Fade");
-    await ToSignal(this, nameof(Faded));
-    _animationPlayer.Play("Fade");
-    await ToSignal(this, nameof(Faded));
+    _anim.PlayBackwards("Fade");
+    await ToSignal(_events, nameof(Events.FadePlayerFaded));
+    _anim.Play("Fade");
+    await ToSignal(_events, nameof(Events.FadePlayerFaded));
     GetTree().Paused = false;
   }
 
   private async void InitialTransition()
   {
     GetTree().Paused = true;
-    _animationPlayer.Play("Fade");
-    await ToSignal(this, nameof(Faded));
+    _anim.Play("Fade");
+    await ToSignal(_events, nameof(Events.FadePlayerFaded));
     GetTree().Paused = false;
   }
 
   private void OnAnimationFinished(String animName)
   {
-    EmitSignal(nameof(Faded));
+    _events.EmitSignal(nameof(Events.FadePlayerFaded));
   }
 }

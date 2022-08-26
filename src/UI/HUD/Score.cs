@@ -3,23 +3,23 @@ using System;
 
 public class Score : Label
 {
+  private Events _events;
   private Player _player;
   private ScoreLight _scoreLight;
 
   public override void _Ready()
   {
-    GetTree().Root.GetNode<Events>("Main/Events").Connect(nameof(Events.Start), this, nameof(Start));
+    _events = GetTree().Root.GetNode<Events>("Main/Events");
+    _events.Connect(nameof(Events.LevelStarted), this, nameof(LevelStarted));
   }
 
-
-  private void Start()
+  private void LevelStarted()
   {
     _player = (Owner as Main).GetPlayer();
     _scoreLight = GetNode<ScoreLight>("Control/ScoreLight");
     _player.Connect(nameof(Player.Scored), this, nameof(OnScored));
     Text = 0.ToString();
   }
-
 
   private async void OnScored()
   {

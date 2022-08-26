@@ -3,21 +3,25 @@ using System;
 
 public class LevelManager : Node
 {
-  enum Levels
+  private enum Levels
   {
     Basket,
   }
+
+  private Events _events;
 
   private Levels _level = Levels.Basket;
 
   public override void _Ready()
   {
-    GetTree().Root.GetNode<Events>("Main/Events").Connect(nameof(Events.GameResetTriggered), this, nameof(GameResetTriggered));
+    _events = GetTree().Root.GetNode<Events>("Main/Events");
+    _events.Connect(nameof(Events.LevelReset), this, nameof(LevelReset));
   }
 
   private async void ChangeLevel(Levels level)
   {
-    await ToSignal(GetNode<FadePlayer>("%FadePlayer"), nameof(FadePlayer.Faded));
+    await ToSignal(_events, nameof(Events.FadePlayerFaded));
+
     if (GetChildCount() > 0)
     {
       foreach (Node2D child in GetChildren())
@@ -26,14 +30,17 @@ public class LevelManager : Node
       }
     }
     await ToSignal(GetTree(), "physics_frame");
+
     var levelLoad = GD.Load($"res://src/levels/{level.ToString()}.tscn") as PackedScene;
     AddChild(levelLoad.Instance());
-    await ToSignal(GetNode<FadePlayer>("%FadePlayer"), nameof(FadePlayer.Faded));
-    GetTree().Root.GetNode<Events>("Main/Events").EmitSignal(nameof(Events.Start));
+
+    await ToSignal(_events, nameof(Events.FadePlayerFaded));
+
+    _events.EmitSignal(nameof(Events.LevelStarted));
 
   }
 
-  private void GameResetTriggered()
+  private void LevelReset()
   {
     ChangeLevel(_level);
   }

@@ -30,7 +30,7 @@ public class ObjectBase : RigidBody2D
 
   private Sprite _sprite;
   private Area2D _area;
-  private AnimationPlayer _animPlayer;
+  private AnimationPlayer _anim;
   private CollisionShape2D _coll;
 
   private AudioStreamPlayer2D _sound;
@@ -43,7 +43,7 @@ public class ObjectBase : RigidBody2D
     base._Ready();
     _sprite = GetNode<Sprite>("Sprite");
     _area = GetNode<Area2D>("Area2D");
-    _animPlayer = GetNode<AnimationPlayer>("Sprite/AnimationPlayer");
+    _anim = GetNode<AnimationPlayer>("Sprite/AnimationPlayer");
     _coll = GetNode<CollisionShape2D>("CollisionShape2D");
 
     _sound = GetNode<AudioStreamPlayer2D>("Sound");
@@ -131,9 +131,8 @@ public class ObjectBase : RigidBody2D
     SetPhysicsProcess(false);
     _sound.PitchScale = 1f + (float)GD.RandRange(-0.15f, 0.15f);
     _sound.Play();
-    AnimationPlayer anim = GetNode<AnimationPlayer>("Sprite/AnimationPlayer");
-    anim.Play("Death");
-    await ToSignal(anim, "animation_finished");
+    _anim.Play("Death");
+    await ToSignal(_anim, "animation_finished");
     QueueFree();
   }
 }

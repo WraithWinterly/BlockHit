@@ -7,9 +7,14 @@ public class PlayerController : KinematicBody2D
   const int Speed = 2;
   const float Gravity = 9.8f * 4;
 
+  private Events _events;
+
   private Player _player;
   private Vector2 _linearVelocity;
-  private AnimationPlayer _animationPlayer;
+  private AnimationPlayer _anim;
+
+  private CollisionShape2D _coll;
+  private Area2D _area;
 
   private float _currentGravity;
   private float _jumpBufferFrames;
@@ -26,11 +31,19 @@ public class PlayerController : KinematicBody2D
   {
     base._Ready();
     _player = Owner as Player;
-    _animationPlayer = GetNode<AnimationPlayer>("Sprite/AnimationPlayer");
+    _events = GetTree().Root.GetNode<Events>("Main/Events");
+
+    _anim = GetNode<AnimationPlayer>("Sprite/AnimationPlayer");
+
+    _coll = GetNode<CollisionShape2D>("CollisionShape2D");
+    _area = GetNode<Area2D>("Area2D");
+
+    _events.Connect(nameof(Events.LevelStarted), this, nameof(Start));
+
     _jumpBufferFrames = MaxJumpBufferFrames;
     _currentGravity = Gravity;
+
     SetPhysicsProcess(false);
-    GetTree().Root.GetNode<Events>("Main/Events").Connect(nameof(Events.Start), this, nameof(Start));
   }
 
   private void Start()
@@ -41,6 +54,7 @@ public class PlayerController : KinematicBody2D
   public override void _PhysicsProcess(float delta)
   {
     base._PhysicsProcess(delta);
+
     _currentGravity = Mathf.Abs(_currentGravity);
     _currentGravity *= _gravityDir;
 
@@ -56,7 +70,7 @@ public class PlayerController : KinematicBody2D
         _canChangeDir = true;
         if (_resetPlayer) return;
         _player.EmitSignal(nameof(Player.Scored));
-        _animationPlayer.Play(_gravityDir == 1 ? "ScoreDown" : "ScoreUp");
+        _anim.Play(_gravityDir == 1 ? "ScoreDown" : "ScoreUp");
       }
     }
 
@@ -94,7 +108,18 @@ public class PlayerController : KinematicBody2D
     }
   }
 
-  public void Jump()
+  public void Die()
+  {
+    SetPhysicsProcess(false);
+    SetProcess(false);
+    SetProcessInput(false);
+    _coll.SetDeferred("disabled", true);
+    _area.SetDeferred("monitoring", false);
+    _area.SetDeferred("monitorable", false);
+    _anim.Play("Death");
+  }
+
+  private void Jump()
   {
     if (!_canChangeDir) return;
 
@@ -103,5 +128,7 @@ public class PlayerController : KinematicBody2D
     _gravityDir *= -1;
     _canChangeDir = false;
   }
+
+
 }
 

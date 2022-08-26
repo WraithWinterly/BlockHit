@@ -3,9 +3,11 @@ using System;
 
 public class Events : Node
 {
-  [Signal] public delegate void Start();
-  [Signal] public delegate void PlayerDied();
-  [Signal] public delegate void ResetGame();
+  [Signal] public delegate void LevelStarted();
 
-  [Signal] public delegate void GameResetTriggered();
+  [Signal] public delegate void PlayerDied();
+
+  [Signal] public delegate void LevelReset();
+
+  [Signal] public delegate void FadePlayerFaded();
 }

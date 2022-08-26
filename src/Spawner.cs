@@ -8,11 +8,13 @@ public class Spawner : Node2D
   [Export] private PackedScene _powerup1;
   [Export] private PackedScene _powerup2;
 
+  private readonly List<PackedScene> _spawners = new List<PackedScene>();
+
   private RandomNumberGenerator _rng = new RandomNumberGenerator();
 
-  private Timer _timer;
+  private Events _events;
 
-  private readonly List<PackedScene> _spawners = new List<PackedScene>();
+  private Timer _timer;
 
   private Node2D _spawnNode;
 
@@ -31,6 +33,8 @@ public class Spawner : Node2D
   public override void _Ready()
   {
     base._Ready();
+    _events = GetTree().Root.GetNode<Events>("Main/Events");
+
     _spawnNode = Owner.GetNode<Node2D>("%Objects");
 
     _timer = GetNode<Timer>("Timer");
@@ -69,10 +73,10 @@ public class Spawner : Node2D
       _spawners.Add(_powerup2);
     }
 
-    GetTree().Root.GetNode<Events>("Main/Events").Connect(nameof(Events.Start), this, nameof(Start));
+    _events.Connect(nameof(Events.LevelStarted), this, nameof(LevelStarted));
   }
 
-  private void Start()
+  private void LevelStarted()
   {
     _timer.Start(0);
   }

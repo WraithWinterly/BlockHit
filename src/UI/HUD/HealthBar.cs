@@ -3,12 +3,14 @@ using System;
 
 public class HealthBar : ProgressBar
 {
+  private Events _events;
   private Player _player;
 
   public override void _Ready()
   {
     base._Ready();
-    GetTree().Root.GetNode<Events>("Main/Events").Connect(nameof(Events.Start), this, nameof(Start));
+    _events = GetTree().Root.GetNode<Events>("Main/Events");
+    _events.Connect(nameof(Events.LevelStarted), this, nameof(Start));
   }
 
   private void Start()
