@@ -14,5 +14,11 @@ public class Level : Node2D
     base._Ready();
     SpawnTopLeft = GetNode<Position2D>("SpawnTopLeft").GlobalPosition;
     SpawnBottomRight = GetNode<Position2D>("SpawnTopRight").GlobalPosition;
+    GetTree().Root.GetNode<Events>("Main/Events").Connect(nameof(Events.Start), this, nameof(Start));
+  }
+
+  private void Start()
+  {
+    GetNode<AudioStreamPlayer>("LevelTrack").Play();
   }
 }

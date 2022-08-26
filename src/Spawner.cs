@@ -35,7 +35,6 @@ public class Spawner : Node2D
 
     _timer = GetNode<Timer>("Timer");
     _timer.Connect("timeout", this, nameof(OnTimerTimeout));
-    _timer.Start(0);
 
     switch (_levelSpeed)
     {
@@ -69,6 +68,13 @@ public class Spawner : Node2D
     {
       _spawners.Add(_powerup2);
     }
+
+    GetTree().Root.GetNode<Events>("Main/Events").Connect(nameof(Events.Start), this, nameof(Start));
+  }
+
+  private void Start()
+  {
+    _timer.Start(0);
   }
 
   private void SpawnObjects()

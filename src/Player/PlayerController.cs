@@ -29,6 +29,13 @@ public class PlayerController : KinematicBody2D
     _animationPlayer = GetNode<AnimationPlayer>("Sprite/AnimationPlayer");
     _jumpBufferFrames = MaxJumpBufferFrames;
     _currentGravity = Gravity;
+    SetPhysicsProcess(false);
+    GetTree().Root.GetNode<Events>("Main/Events").Connect(nameof(Events.Start), this, nameof(Start));
+  }
+
+  private void Start()
+  {
+    SetPhysicsProcess(true);
   }
 
   public override void _PhysicsProcess(float delta)
