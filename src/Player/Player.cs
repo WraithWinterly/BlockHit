@@ -9,7 +9,6 @@ public class Player : Node2D
   private const int MaxHealth = 100;
 
   [Signal] public delegate void Scored();
-  [Signal] public delegate void Died();
 
   private AudioStreamPlayer _scoreSound;
   private AudioStreamPlayer _deathSound;
@@ -41,6 +40,19 @@ public class Player : Node2D
   {
     _health -= amount;
     _health = _health < 0 ? 0 : _health;
+    if (_health == 0)
+    {
+      GetTree().Root.GetNode<Events>("Main/Events").EmitSignal(nameof(Events.PlayerDied));
+      var k = GetNode<KinematicBody2D>("KinematicBody2D");
+      k.SetPhysicsProcess(false);
+      k.SetProcess(false);
+      k.SetProcessInput(false);
+      k.GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
+      _area.SetDeferred("monitoring", false);
+      _area.SetDeferred("monitorable", false);
+      GetNode<AnimationPlayer>("KinematicBody2D/AnimationPlayer").Play("Death");
+      _deathSound.Play();
+    }
   }
 
   public void AddHealth(int amount)

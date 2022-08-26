@@ -6,4 +6,6 @@ public class Events : Node
   [Signal] public delegate void Start();
   [Signal] public delegate void PlayerDied();
   [Signal] public delegate void ResetGame();
+
+  [Signal] public delegate void GameResetTriggered();
 }

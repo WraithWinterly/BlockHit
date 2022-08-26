@@ -10,7 +10,7 @@ public class Main : Node
 
   public Player GetPlayer()
   {
-    return GetNode<Player>("Basket/Player");
+    return GetNode<Player>("LevelManager/Basket/Player");
   }
 
 }

@@ -14,6 +14,7 @@ public class FadePlayer : CanvasLayer
     _animationPlayer.Connect("animation_finished", this, nameof(OnAnimationFinished));
     InitialTransition();
     Show();
+    GetTree().Root.GetNode<Events>("Main/Events").Connect(nameof(Events.GameResetTriggered), this, nameof(Transition));
   }
 
   public async void Transition()
