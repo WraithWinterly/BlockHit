@@ -23,6 +23,8 @@ public class MainMenu : Control
     _events.Connect(nameof(Events.ReturnedToMenu), this, nameof(OnReturnedToMenu));
     _playButton.Connect("pressed", this, nameof(OnPlayPressed));
     _quitButton.Connect("pressed", this, nameof(OnQuitPressed));
+
+    _playButton.GrabFocus();
   }
 
   private void OnPlayPressed()
@@ -62,6 +64,7 @@ public class MainMenu : Control
     Show();
     EnableButtons();
     _mainMenuTrack.Play();
+    _playButton.GrabFocus();
   }
 
   //  // Called every frame. 'delta' is the elapsed time since the previous frame.

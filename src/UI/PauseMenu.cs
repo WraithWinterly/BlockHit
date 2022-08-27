@@ -40,6 +40,7 @@ public class PauseMenu : Control
         GetTree().Paused = true;
         Show();
         EnableButtons();
+        _continueButton.GrabFocus();
       }
     }
   }

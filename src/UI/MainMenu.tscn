@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/UI/font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/UI/ButtonHover.tres" type="StyleBox" id=2]
@@ -6,6 +6,14 @@
 [ext_resource path="res://Assets/UI/ButtonPressed.tres" type="StyleBox" id=4]
 [ext_resource path="res://Assets/Music/AnttisInstrumentalsBeatyBeat2.wav" type="AudioStream" id=5]
 [ext_resource path="res://src/UI/MainMenu.cs" type="Script" id=6]
+[ext_resource path="res://Assets/Levels/Basket.png" type="Texture" id=7]
+[ext_resource path="res://Assets/UI/LevelButton.tres" type="StyleBox" id=8]
+[ext_resource path="res://Assets/Levels/Solid.png" type="Texture" id=9]
+[ext_resource path="res://src/UI/FontLevelSelector.tres" type="DynamicFont" id=10]
+[ext_resource path="res://Assets/Levels/Block.png" type="Texture" id=11]
+[ext_resource path="res://Assets/UI/LevelButtonHover.tres" type="StyleBox" id=12]
+[ext_resource path="res://Assets/UI/LevelButtonPressed.tres" type="StyleBox" id=13]
+[ext_resource path="res://src/UI/LevelSelector.cs" type="Script" id=14]
 
 [sub_resource type="Animation" id=8]
 resource_name = "Fade"
@@ -109,7 +117,7 @@ margin_bottom = 91.0
 custom_fonts/font = ExtResource( 1 )
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 4 )
-custom_styles/focus = ExtResource( 3 )
+custom_styles/focus = ExtResource( 2 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 text = "Play"
@@ -121,7 +129,122 @@ margin_bottom = 91.0
 custom_fonts/font = ExtResource( 1 )
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 4 )
-custom_styles/focus = ExtResource( 3 )
+custom_styles/focus = ExtResource( 2 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 text = "Quit"
+
+[node name="LevelSelector" type="Control" parent="."]
+anchor_top = 0.085
+anchor_right = 0.3
+anchor_bottom = 0.462
+script = ExtResource( 14 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelector"]
+anchor_left = 0.02
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 100
+
+[node name="Basket" type="Control" parent="LevelSelector/VBoxContainer"]
+margin_right = 376.0
+
+[node name="Button" type="Button" parent="LevelSelector/VBoxContainer/Basket"]
+margin_right = 300.0
+margin_bottom = 65.0
+custom_styles/hover = ExtResource( 12 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/focus = ExtResource( 12 )
+custom_styles/normal = ExtResource( 8 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelSelector/VBoxContainer/Basket/Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 95
+
+[node name="Control" type="Control" parent="LevelSelector/VBoxContainer/Basket/Button/HBoxContainer"]
+margin_bottom = 65.0
+
+[node name="TextureRect" type="TextureRect" parent="LevelSelector/VBoxContainer/Basket/Button/HBoxContainer/Control"]
+margin_left = 4.0
+margin_right = 20.0
+rect_scale = Vector2( 4, 4 )
+texture = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="LevelSelector/VBoxContainer/Basket/Button/HBoxContainer"]
+margin_left = 95.0
+margin_top = 1.0
+margin_right = 236.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 10 )
+text = "Basket"
+
+[node name="Solid" type="Control" parent="LevelSelector/VBoxContainer"]
+margin_top = 100.0
+margin_right = 376.0
+margin_bottom = 100.0
+
+[node name="Button" type="Button" parent="LevelSelector/VBoxContainer/Solid"]
+margin_right = 300.0
+margin_bottom = 65.0
+custom_styles/hover = ExtResource( 12 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/focus = ExtResource( 12 )
+custom_styles/normal = ExtResource( 8 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelSelector/VBoxContainer/Solid/Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 95
+
+[node name="Control" type="Control" parent="LevelSelector/VBoxContainer/Solid/Button/HBoxContainer"]
+margin_bottom = 65.0
+
+[node name="TextureRect" type="TextureRect" parent="LevelSelector/VBoxContainer/Solid/Button/HBoxContainer/Control"]
+margin_left = 4.0
+margin_right = 20.0
+rect_scale = Vector2( 4, 4 )
+texture = ExtResource( 9 )
+
+[node name="Label" type="Label" parent="LevelSelector/VBoxContainer/Solid/Button/HBoxContainer"]
+margin_left = 95.0
+margin_top = 1.0
+margin_right = 205.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 10 )
+text = "Solid"
+
+[node name="Block" type="Control" parent="LevelSelector/VBoxContainer"]
+margin_top = 200.0
+margin_right = 376.0
+margin_bottom = 200.0
+
+[node name="Button" type="Button" parent="LevelSelector/VBoxContainer/Block"]
+margin_right = 300.0
+margin_bottom = 65.0
+custom_styles/hover = ExtResource( 12 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/focus = ExtResource( 12 )
+custom_styles/normal = ExtResource( 8 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelSelector/VBoxContainer/Block/Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 95
+
+[node name="Control" type="Control" parent="LevelSelector/VBoxContainer/Block/Button/HBoxContainer"]
+margin_bottom = 65.0
+
+[node name="TextureRect" type="TextureRect" parent="LevelSelector/VBoxContainer/Block/Button/HBoxContainer/Control"]
+margin_left = 4.0
+margin_right = 20.0
+rect_scale = Vector2( 4, 4 )
+texture = ExtResource( 11 )
+
+[node name="Label" type="Label" parent="LevelSelector/VBoxContainer/Block/Button/HBoxContainer"]
+margin_left = 95.0
+margin_top = 1.0
+margin_right = 216.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 10 )
+text = "Block"

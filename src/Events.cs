@@ -14,4 +14,6 @@ public class Events : Node
   [Signal] public delegate void LevelReset();
 
   [Signal] public delegate void FadePlayerFaded();
+
+  [Signal] public delegate void LevelSelectorChanged(LevelManager.Levels level);
 }

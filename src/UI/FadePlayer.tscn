@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/UI/FadePlayer.cs" type="Script" id=1]
+[ext_resource path="res://Assets/UI/font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://src/UI/FontLevelSelector.tres" type="DynamicFont" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Fade"
@@ -46,5 +48,24 @@ mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect"]
+autoplay = "Fade"
 anims/Fade = SubResource( 1 )
 anims/RESET = SubResource( 2 )
+
+[node name="Label" type="Label" parent="TextureRect"]
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 0.1
+margin_bottom = 89.0
+custom_fonts/font = ExtResource( 2 )
+text = "BlockHit"
+align = 1
+
+[node name="Loading" type="Label" parent="TextureRect"]
+anchor_top = 0.23
+anchor_right = 1.0
+anchor_bottom = 0.23
+margin_bottom = 63.0
+custom_fonts/font = ExtResource( 3 )
+text = "Loading..."
+align = 1

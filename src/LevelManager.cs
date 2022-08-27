@@ -6,6 +6,8 @@ public class LevelManager : Node
   public enum Levels
   {
     Basket,
+    Solid,
+    Block,
   }
 
   public Levels CurrentLevel { get => _level; }
@@ -19,10 +21,20 @@ public class LevelManager : Node
     _events = GetTree().Root.GetNode<Events>("Main/Events");
     _events.Connect(nameof(Events.LevelReset), this, nameof(LevelReset));
     _events.Connect(nameof(Events.ReturnedToMenu), this, nameof(OnReturnedToMenu));
+
+    _events.Connect(nameof(Events.LevelSelectorChanged), this, nameof(ChangeLevel));
+
+    // preload all levels
+    foreach (Levels level in Enum.GetValues(typeof(Levels)))
+    {
+      GD.Load($"res://src/levels/{level.ToString()}.tscn");
+    }
+    ChangeLevel(Levels.Basket);
   }
 
   private async void ChangeLevel(Levels level)
   {
+    var levelLoad = GD.Load($"res://src/levels/{level.ToString()}.tscn") as PackedScene;
     if (GetChildCount() > 0)
     {
       foreach (Node2D child in GetChildren())
@@ -32,11 +44,8 @@ public class LevelManager : Node
     }
     await ToSignal(GetTree(), "physics_frame");
 
-    var levelLoad = GD.Load($"res://src/levels/{level.ToString()}.tscn") as PackedScene;
     AddChild(levelLoad.Instance());
-
-
-
+    _level = level;
   }
 
   private async void LevelReset()

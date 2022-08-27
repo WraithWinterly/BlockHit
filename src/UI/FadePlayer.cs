@@ -7,16 +7,22 @@ public class FadePlayer : CanvasLayer
 
   private AnimationPlayer _anim;
 
+  public override void _EnterTree()
+  {
+    base._EnterTree();
+    Show();
+  }
+
   public override void _Ready()
   {
     base._Ready();
     _events = GetTree().Root.GetNode<Events>("Main/Events");
     _anim = GetNode<AnimationPlayer>("TextureRect/AnimationPlayer");
     _anim.Connect("animation_finished", this, nameof(OnAnimationFinished));
-    InitialTransition();
-    Show();
+
     _events.Connect(nameof(Events.LevelReset), this, nameof(Transition));
     _events.Connect(nameof(Events.ReturnedToMenu), this, nameof(Transition));
+    InitialTransition();
   }
 
   public async void Transition()
