@@ -7,7 +7,9 @@ public class Events : Node
 
   [Signal] public delegate void PlayerDied();
 
-  [Signal] public delegate void LevelComplete();
+  [Signal] public delegate void LevelCompleted();
+
+  [Signal] public delegate void ReturnedToMenu();
 
   [Signal] public delegate void LevelReset();
 

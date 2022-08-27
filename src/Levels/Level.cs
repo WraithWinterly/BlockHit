@@ -34,6 +34,6 @@ public class Level : Node2D
 
   private void OnTimerTimeout()
   {
-    _events.EmitSignal(nameof(Events.LevelComplete));
+    _events.EmitSignal(nameof(Events.LevelCompleted));
   }
 }

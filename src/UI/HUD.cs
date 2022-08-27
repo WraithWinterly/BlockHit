@@ -10,12 +10,19 @@ public class HUD : Control
     _events = GetTree().Root.GetNode<Events>("Main/Events");
 
     _events.Connect(nameof(Events.LevelStarted), this, nameof(OnLevelStarted));
+    _events.Connect(nameof(Events.ReturnedToMenu), this, nameof(OnReturnedToMenu));
     Hide();
   }
 
   private void OnLevelStarted()
   {
     Show();
+  }
+
+  private async void OnReturnedToMenu()
+  {
+    await ToSignal(_events, nameof(Events.FadePlayerFaded));
+    Hide();
   }
 
 

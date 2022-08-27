@@ -14,7 +14,7 @@ public class PreTransitionScreen : Control
     _label = GetNode<Label>("Label");
 
     _events.Connect(nameof(Events.PlayerDied), this, nameof(OnPlayerDied));
-    _events.Connect(nameof(Events.LevelComplete), this, nameof(OnLevelComplete));
+    _events.Connect(nameof(Events.LevelCompleted), this, nameof(OnLevelComplete));
   }
 
   private async void OnPlayerDied()
@@ -31,7 +31,7 @@ public class PreTransitionScreen : Control
     _label.Text = $"---Completed ({score}!)---";
     _anim.Play("FadeComplete");
     await ToSignal(_anim, "animation_finished");
-    _events.EmitSignal(nameof(Events.LevelReset));
+    _events.EmitSignal(nameof(Events.ReturnedToMenu));
   }
 
 }

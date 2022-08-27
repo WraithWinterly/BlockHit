@@ -19,12 +19,15 @@
 script = ExtResource( 2 )
 
 [node name="MusicManager" type="Node" parent="."]
+pause_mode = 2
 script = ExtResource( 3 )
 
 [node name="Events" type="Node" parent="."]
+pause_mode = 2
 script = ExtResource( 9 )
 
 [node name="LevelManager" type="Node" parent="."]
+pause_mode = 2
 script = ExtResource( 17 )
 
 [node name="Basket" parent="LevelManager" instance=ExtResource( 1 )]

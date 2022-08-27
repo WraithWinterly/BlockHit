@@ -4,7 +4,7 @@ using System;
 public class PauseMenu : Control
 {
   private Events _events;
-
+  private VBoxContainer _vBox;
   private Button _continueButton;
   private Button _returnToMenuButton;
   private Button _quitButton;
@@ -13,6 +13,7 @@ public class PauseMenu : Control
   {
     base._Ready();
     _events = GetTree().Root.GetNode<Events>("Main/Events");
+    _vBox = GetNode<VBoxContainer>("CenterContainer/VBoxContainer");
     _continueButton = GetNode<Button>("CenterContainer/VBoxContainer/Continue");
     _returnToMenuButton = GetNode<Button>("CenterContainer/VBoxContainer/ReturnToMenu");
     _quitButton = GetNode<Button>("CenterContainer/VBoxContainer/Quit");
@@ -38,7 +39,24 @@ public class PauseMenu : Control
       {
         GetTree().Paused = true;
         Show();
+        EnableButtons();
       }
+    }
+  }
+
+  private void DisableButtons()
+  {
+    foreach (Button button in _vBox.GetChildren())
+    {
+      button.Disabled = true;
+    }
+  }
+
+  private void EnableButtons()
+  {
+    foreach (Button button in _vBox.GetChildren())
+    {
+      button.Disabled = false;
     }
   }
 
@@ -48,9 +66,12 @@ public class PauseMenu : Control
     Hide();
   }
 
-  private void OnReturnToMenuPressed()
+  private async void OnReturnToMenuPressed()
   {
-
+    DisableButtons();
+    _events.EmitSignal(nameof(Events.ReturnedToMenu));
+    await ToSignal(_events, nameof(Events.FadePlayerFaded));
+    Hide();
   }
 
   private void OnQuitPressed()

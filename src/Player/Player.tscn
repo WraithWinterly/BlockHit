@@ -175,8 +175,10 @@ tracks/1/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 8 )
 
 [sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 8, 8 )
 
 [node name="Player" type="Node2D" groups=["Player"]]
 script = ExtResource( 5 )

@@ -12,6 +12,7 @@ public class Score : Label
     _events = GetTree().Root.GetNode<Events>("Main/Events");
     _events.Connect(nameof(Events.LevelStarted), this, nameof(LevelStarted));
     _events.Connect(nameof(Events.LevelReset), this, nameof(LevelReset));
+    _events.Connect(nameof(Events.ReturnedToMenu), this, nameof(LevelReset));
   }
 
   private void LevelStarted()

@@ -18,12 +18,11 @@ public class LevelManager : Node
   {
     _events = GetTree().Root.GetNode<Events>("Main/Events");
     _events.Connect(nameof(Events.LevelReset), this, nameof(LevelReset));
+    _events.Connect(nameof(Events.ReturnedToMenu), this, nameof(OnReturnedToMenu));
   }
 
   private async void ChangeLevel(Levels level)
   {
-    await ToSignal(_events, nameof(Events.FadePlayerFaded));
-
     if (GetChildCount() > 0)
     {
       foreach (Node2D child in GetChildren())
@@ -36,14 +35,21 @@ public class LevelManager : Node
     var levelLoad = GD.Load($"res://src/levels/{level.ToString()}.tscn") as PackedScene;
     AddChild(levelLoad.Instance());
 
-    await ToSignal(_events, nameof(Events.FadePlayerFaded));
 
-    _events.EmitSignal(nameof(Events.LevelStarted));
 
   }
 
-  private void LevelReset()
+  private async void LevelReset()
   {
+    await ToSignal(_events, nameof(Events.FadePlayerFaded));
+    ChangeLevel(_level);
+    await ToSignal(_events, nameof(Events.FadePlayerFaded));
+    _events.EmitSignal(nameof(Events.LevelStarted));
+  }
+
+  private async void OnReturnedToMenu()
+  {
+    await ToSignal(_events, nameof(Events.FadePlayerFaded));
     ChangeLevel(_level);
   }
 }

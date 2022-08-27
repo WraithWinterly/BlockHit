@@ -38,7 +38,7 @@ public class Player : Node2D
 
     _area = GetNode<Area2D>("KinematicBody2D/Area2D");
 
-    _events.Connect(nameof(Events.LevelComplete), this, nameof(OnLevelComplete));
+    _events.Connect(nameof(Events.LevelCompleted), this, nameof(OnLevelComplete));
     Connect(nameof(Scored), this, nameof(OnScored));
     _area.Connect("body_entered", this, nameof(OnAreaBodyEntered));
 

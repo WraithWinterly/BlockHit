@@ -16,16 +16,19 @@ public class FadePlayer : CanvasLayer
     InitialTransition();
     Show();
     _events.Connect(nameof(Events.LevelReset), this, nameof(Transition));
+    _events.Connect(nameof(Events.ReturnedToMenu), this, nameof(Transition));
   }
 
   public async void Transition()
   {
+    Main.InTransition = true;
     GetTree().Paused = true;
     _anim.PlayBackwards("Fade");
     await ToSignal(_events, nameof(Events.FadePlayerFaded));
     _anim.Play("Fade");
     await ToSignal(_events, nameof(Events.FadePlayerFaded));
     GetTree().Paused = false;
+    Main.InTransition = false;
   }
 
   private async void InitialTransition()
