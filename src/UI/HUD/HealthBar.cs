@@ -15,7 +15,7 @@ public class HealthBar : ProgressBar
 
   private void Start()
   {
-    _player = (Owner as Main).GetPlayer();
+    _player = (Owner.Owner as Main).GetPlayer();
   }
 
   public override void _PhysicsProcess(float delta)

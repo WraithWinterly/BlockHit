@@ -1,219 +1,19 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/Levels/Basket.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Main.cs" type="Script" id=2]
 [ext_resource path="res://src/MusicManager.cs" type="Script" id=3]
-[ext_resource path="res://src/UI/HUD/HealthBar.cs" type="Script" id=4]
-[ext_resource path="res://Assets/UI/BlkCherry.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://src/UI/HUD/Score.cs" type="Script" id=6]
-[ext_resource path="res://src/ScoreLight.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/UI/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/UI/MainMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/UI/PreTransitionScreen.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/UI/PauseMenu.cs" type="Script" id=7]
 [ext_resource path="res://src/UI/FadePlayer.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Events.cs" type="Script" id=9]
-[ext_resource path="res://src/UI/MainMenu.cs" type="Script" id=10]
 [ext_resource path="res://Assets/UI/Button.tres" type="StyleBox" id=11]
 [ext_resource path="res://Assets/UI/ButtonHover.tres" type="StyleBox" id=12]
 [ext_resource path="res://Assets/UI/ButtonPressed.tres" type="StyleBox" id=13]
-[ext_resource path="res://Assets/Music/AnttisInstrumentalsBeatyBeat2.wav" type="AudioStream" id=14]
 [ext_resource path="res://Assets/UI/font.tres" type="DynamicFont" id=15]
-[ext_resource path="res://src/UI/PreTransitionScreen.cs" type="Script" id=16]
 [ext_resource path="res://src/LevelManager.cs" type="Script" id=17]
-[ext_resource path="res://src/UI/LevelTimer.cs" type="Script" id=18]
-
-[sub_resource type="DynamicFontData" id=3]
-font_path = "res://Assets/UI/BlkCherry.ttf"
-
-[sub_resource type="DynamicFont" id=4]
-size = 96
-use_mipmaps = true
-use_filter = true
-font_data = SubResource( 3 )
-
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.0313726, 0.403922, 0.435294, 1 )
-
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.823529, 0.392157, 0, 1 )
-
-[sub_resource type="Animation" id=8]
-resource_name = "Fade"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
-[sub_resource type="Animation" id=9]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
-}
-
-[sub_resource type="DynamicFont" id=10]
-size = 70
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 5 )
-
-[sub_resource type="Animation" id=11]
-resource_name = "Fade"
-length = 0.8
-step = 0.01
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Label:custom_fonts/font:size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 70, 112 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.01, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
-}
-
-[sub_resource type="Animation" id=13]
-resource_name = "FadeComplete"
-length = 2.5
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7, 2.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0.254902, 1, 0, 1 ), Color( 0.254902, 1, 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Label:custom_fonts/font:size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 2.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 70, 112 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.01, 2.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
-}
-
-[sub_resource type="Animation" id=12]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Label:custom_fonts/font:size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 70 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
 
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
@@ -235,121 +35,67 @@ script = ExtResource( 17 )
 unique_name_in_owner = true
 visible = false
 
-[node name="HUD" type="Control" parent="UI"]
+[node name="HUD" parent="UI" instance=ExtResource( 4 )]
+
+[node name="MainMenu" parent="UI" instance=ExtResource( 5 )]
+
+[node name="PreTransitionScreen" parent="UI" instance=ExtResource( 6 )]
+
+[node name="PauseMenu" type="Control" parent="UI"]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
+script = ExtResource( 7 )
 
-[node name="Score" type="Control" parent="UI/HUD"]
-anchor_left = 0.85
-anchor_top = 0.057
-anchor_right = 0.85
-anchor_bottom = 0.066
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="Score" type="Label" parent="UI/HUD/Score"]
-anchor_right = 1.0
-margin_right = 46.0
-margin_bottom = 121.0
-custom_fonts/font = SubResource( 4 )
-text = "0"
-align = 2
-script = ExtResource( 6 )
-
-[node name="Control" type="Control" parent="UI/HUD/Score/Score"]
-margin_left = 65.0
-margin_top = 55.0
-
-[node name="ScoreLight" parent="UI/HUD/Score/Score/Control" instance=ExtResource( 7 )]
-scale = Vector2( 2, 2 )
-
-[node name="ProgressBar" type="ProgressBar" parent="UI/HUD"]
-anchor_left = 0.015
-anchor_top = 0.88
-anchor_right = 0.45
-anchor_bottom = 0.915
-rect_rotation = -90.0
-custom_styles/fg = SubResource( 5 )
-custom_styles/bg = SubResource( 6 )
-value = 100.0
-percent_visible = false
-script = ExtResource( 4 )
-
-[node name="LevelTimer" type="Control" parent="UI/HUD"]
-anchor_left = 0.066
-anchor_top = 0.104
-anchor_right = 0.066
-anchor_bottom = 0.104
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="LevelTimer" type="Label" parent="UI/HUD/LevelTimer"]
-custom_fonts/font = SubResource( 4 )
-text = "Timer: 0"
-align = 1
-script = ExtResource( 18 )
-
-[node name="MainMenu" type="Control" parent="UI"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-script = ExtResource( 10 )
-
-[node name="ColorRect" type="ColorRect" parent="UI/MainMenu"]
+[node name="ColorRect" type="ColorRect" parent="UI/PauseMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color( 0, 0, 0, 0.0980392 )
 
-[node name="Label" type="Label" parent="UI/MainMenu"]
-anchor_top = 0.1
+[node name="CenterContainer" type="CenterContainer" parent="UI/PauseMenu"]
 anchor_right = 1.0
-anchor_bottom = 0.1
-margin_bottom = 14.0
-custom_fonts/font = ExtResource( 15 )
-text = "BlockHit"
-align = 1
+anchor_bottom = 1.0
 
-[node name="Play" type="Button" parent="UI/MainMenu"]
-anchor_left = 0.38
-anchor_top = 0.55
-anchor_right = 0.61
-anchor_bottom = 0.55
-margin_right = 12.0
-margin_bottom = 20.0
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PauseMenu/CenterContainer"]
+margin_left = 363.0
+margin_top = 208.0
+margin_right = 917.0
+margin_bottom = 511.0
+custom_constants/separation = 15
+alignment = 1
+
+[node name="Continue" type="Button" parent="UI/PauseMenu/CenterContainer/VBoxContainer"]
+margin_right = 554.0
+margin_bottom = 91.0
 custom_fonts/font = ExtResource( 15 )
 custom_styles/hover = ExtResource( 12 )
 custom_styles/pressed = ExtResource( 13 )
 custom_styles/focus = ExtResource( 11 )
 custom_styles/disabled = ExtResource( 11 )
 custom_styles/normal = ExtResource( 11 )
-text = "Play"
+text = "Continue"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/MainMenu"]
-anims/Fade = SubResource( 8 )
-anims/RESET = SubResource( 9 )
+[node name="ReturnToMenu" type="Button" parent="UI/PauseMenu/CenterContainer/VBoxContainer"]
+margin_top = 106.0
+margin_right = 554.0
+margin_bottom = 197.0
+custom_fonts/font = ExtResource( 15 )
+custom_styles/hover = ExtResource( 12 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+text = "Return to Menu"
 
-[node name="MainMenuTrack" type="AudioStreamPlayer" parent="UI/MainMenu"]
-stream = ExtResource( 14 )
-autoplay = true
-
-[node name="PreTransitionScreen" type="Control" parent="UI"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource( 16 )
-
-[node name="Label" type="Label" parent="UI/PreTransitionScreen"]
-anchor_top = 0.3
-anchor_right = 1.0
-anchor_bottom = 0.7
-custom_fonts/font = SubResource( 10 )
-text = "---ENDED---"
-align = 1
-valign = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/PreTransitionScreen"]
-anims/Fade = SubResource( 11 )
-anims/FadeComplete = SubResource( 13 )
-anims/RESET = SubResource( 12 )
+[node name="Quit" type="Button" parent="UI/PauseMenu/CenterContainer/VBoxContainer"]
+margin_top = 212.0
+margin_right = 554.0
+margin_bottom = 303.0
+custom_fonts/font = ExtResource( 15 )
+custom_styles/hover = ExtResource( 12 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+text = "Quit"

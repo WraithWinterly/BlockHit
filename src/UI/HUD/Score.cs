@@ -16,7 +16,7 @@ public class Score : Label
 
   private void LevelStarted()
   {
-    _player = (Owner as Main).GetPlayer();
+    _player = (Owner.Owner as Main).GetPlayer();
     _scoreLight = GetNode<ScoreLight>("Control/ScoreLight");
     _player.Connect(nameof(Player.Scored), this, nameof(OnScored));
   }

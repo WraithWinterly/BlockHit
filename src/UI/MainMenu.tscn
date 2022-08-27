@@ -1,0 +1,127 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/UI/font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/UI/ButtonHover.tres" type="StyleBox" id=2]
+[ext_resource path="res://Assets/UI/Button.tres" type="StyleBox" id=3]
+[ext_resource path="res://Assets/UI/ButtonPressed.tres" type="StyleBox" id=4]
+[ext_resource path="res://Assets/Music/AnttisInstrumentalsBeatyBeat2.wav" type="AudioStream" id=5]
+[ext_resource path="res://src/UI/MainMenu.cs" type="Script" id=6]
+
+[sub_resource type="Animation" id=8]
+resource_name = "Fade"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 6 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0.0980392 )
+
+[node name="Label" type="Label" parent="."]
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 0.1
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 1 )
+text = "BlockHit"
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Fade = SubResource( 8 )
+anims/RESET = SubResource( 9 )
+
+[node name="MainMenuTrack" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+margin_left = 398.0
+margin_top = 224.0
+margin_right = 882.0
+margin_bottom = 315.0
+custom_constants/separation = 10
+
+[node name="Play" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_right = 239.0
+margin_bottom = 91.0
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+text = "Play"
+
+[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_left = 249.0
+margin_right = 484.0
+margin_bottom = 91.0
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+text = "Quit"

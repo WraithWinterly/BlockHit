@@ -30,7 +30,7 @@ public class LevelTimer : Label
 
   private void LevelStarted()
   {
-    _levelTimer = (Owner as Main).GetLevelTimer();
+    _levelTimer = (Owner.Owner as Main).GetLevelTimer();
   }
 
   private async void LevelReset()
