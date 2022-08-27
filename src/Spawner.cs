@@ -91,7 +91,6 @@ public class Spawner : Node2D
 
       if (_spawners.Count == 2)
       {
-        GD.Print("double chance algo");
         int chance = _rng.RandiRange(0, 100);
         if (chance <= 80)
         {

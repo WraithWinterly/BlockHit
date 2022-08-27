@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/Levels/Basket.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Main.cs" type="Script" id=2]
@@ -15,8 +15,9 @@
 [ext_resource path="res://Assets/UI/ButtonPressed.tres" type="StyleBox" id=13]
 [ext_resource path="res://Assets/Music/AnttisInstrumentalsBeatyBeat2.wav" type="AudioStream" id=14]
 [ext_resource path="res://Assets/UI/font.tres" type="DynamicFont" id=15]
-[ext_resource path="res://src/UI/DeathScreen.cs" type="Script" id=16]
+[ext_resource path="res://src/UI/PreTransitionScreen.cs" type="Script" id=16]
 [ext_resource path="res://src/LevelManager.cs" type="Script" id=17]
+[ext_resource path="res://src/UI/LevelTimer.cs" type="Script" id=18]
 
 [sub_resource type="DynamicFontData" id=3]
 font_path = "res://Assets/UI/BlkCherry.ttf"
@@ -135,6 +136,46 @@ tracks/2/keys = {
 "values": [ false, true, false ]
 }
 
+[sub_resource type="Animation" id=13]
+resource_name = "FadeComplete"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.254902, 1, 0, 1 ), Color( 0.254902, 1, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label:custom_fonts/font:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 70, 112 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.01, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
 [sub_resource type="Animation" id=12]
 length = 0.001
 tracks/0/type = "value"
@@ -235,6 +276,20 @@ value = 100.0
 percent_visible = false
 script = ExtResource( 4 )
 
+[node name="LevelTimer" type="Control" parent="UI/HUD"]
+anchor_left = 0.066
+anchor_top = 0.104
+anchor_right = 0.066
+anchor_bottom = 0.104
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="LevelTimer" type="Label" parent="UI/HUD/LevelTimer"]
+custom_fonts/font = SubResource( 4 )
+text = "Timer: 0"
+align = 1
+script = ExtResource( 18 )
+
 [node name="MainMenu" type="Control" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -279,13 +334,13 @@ anims/RESET = SubResource( 9 )
 stream = ExtResource( 14 )
 autoplay = true
 
-[node name="DeathScreen" type="Control" parent="UI"]
+[node name="PreTransitionScreen" type="Control" parent="UI"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 16 )
 
-[node name="Label" type="Label" parent="UI/DeathScreen"]
+[node name="Label" type="Label" parent="UI/PreTransitionScreen"]
 anchor_top = 0.3
 anchor_right = 1.0
 anchor_bottom = 0.7
@@ -294,6 +349,7 @@ text = "---ENDED---"
 align = 1
 valign = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/DeathScreen"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/PreTransitionScreen"]
 anims/Fade = SubResource( 11 )
+anims/FadeComplete = SubResource( 13 )
 anims/RESET = SubResource( 12 )

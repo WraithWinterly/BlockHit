@@ -3,10 +3,12 @@ using System;
 
 public class LevelManager : Node
 {
-  private enum Levels
+  public enum Levels
   {
     Basket,
   }
+
+  public Levels CurrentLevel { get => _level; }
 
   private Events _events;
 

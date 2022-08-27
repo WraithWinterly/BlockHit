@@ -16,6 +16,7 @@ public class Player : Node2D
   private AudioStreamPlayer _scoreSound;
   private AudioStreamPlayer _deathSound;
   private AudioStreamPlayer _hitSound;
+  private AudioStreamPlayer _completeSound;
 
   private ScoreLight _scoreLight;
 
@@ -33,9 +34,11 @@ public class Player : Node2D
     _scoreSound = GetNode<AudioStreamPlayer>("ScoreSound");
     _deathSound = GetNode<AudioStreamPlayer>("DeathSound");
     _hitSound = GetNode<AudioStreamPlayer>("HurtSound");
+    _completeSound = GetNode<AudioStreamPlayer>("CompleteSound");
 
     _area = GetNode<Area2D>("KinematicBody2D/Area2D");
 
+    _events.Connect(nameof(Events.LevelComplete), this, nameof(OnLevelComplete));
     Connect(nameof(Scored), this, nameof(OnScored));
     _area.Connect("body_entered", this, nameof(OnAreaBodyEntered));
 
@@ -60,6 +63,12 @@ public class Player : Node2D
     _playerController.Die();
 
     _deathSound.Play();
+  }
+
+  private void OnLevelComplete()
+  {
+    _completeSound.Play();
+    _playerController.OnLevelComplete();
   }
 
   public void AddHealth(int amount)

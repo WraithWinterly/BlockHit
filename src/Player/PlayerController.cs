@@ -108,7 +108,7 @@ public class PlayerController : KinematicBody2D
     }
   }
 
-  public void Die()
+  private void EndCharacterCommon()
   {
     SetPhysicsProcess(false);
     SetProcess(false);
@@ -116,7 +116,18 @@ public class PlayerController : KinematicBody2D
     _coll.SetDeferred("disabled", true);
     _area.SetDeferred("monitoring", false);
     _area.SetDeferred("monitorable", false);
+  }
+
+  public void Die()
+  {
+    EndCharacterCommon();
     _anim.Play("Death");
+  }
+
+  public void OnLevelComplete()
+  {
+    EndCharacterCommon();
+    _anim.Play("Complete");
   }
 
   private void Jump()
