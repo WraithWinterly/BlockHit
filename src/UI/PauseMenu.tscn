@@ -24,9 +24,9 @@ anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 363.0
-margin_top = 208.0
+margin_top = 261.0
 margin_right = 917.0
-margin_bottom = 511.0
+margin_bottom = 458.0
 custom_constants/separation = 15
 alignment = 1
 
@@ -52,15 +52,3 @@ custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 5 )
 custom_styles/normal = ExtResource( 5 )
 text = "Return to Menu"
-
-[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 212.0
-margin_right = 554.0
-margin_bottom = 303.0
-custom_fonts/font = ExtResource( 2 )
-custom_styles/hover = ExtResource( 3 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/focus = ExtResource( 3 )
-custom_styles/disabled = ExtResource( 5 )
-custom_styles/normal = ExtResource( 5 )
-text = "Quit"

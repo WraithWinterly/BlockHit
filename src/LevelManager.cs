@@ -13,12 +13,14 @@ public class LevelManager : Node
   public Levels CurrentLevel { get => _level; }
 
   private Events _events;
+  private SaveManager _saveManager;
 
   private Levels _level = Levels.Basket;
 
-  public override void _Ready()
+  public override async void _Ready()
   {
     _events = GetTree().Root.GetNode<Events>("Main/Events");
+    _saveManager = GetTree().Root.GetNode<SaveManager>("Main/SaveManager");
     _events.Connect(nameof(Events.LevelReset), this, nameof(LevelReset));
     _events.Connect(nameof(Events.ReturnedToMenu), this, nameof(OnReturnedToMenu));
 
@@ -29,7 +31,10 @@ public class LevelManager : Node
     {
       GD.Load($"res://src/levels/{level.ToString()}.tscn");
     }
-    ChangeLevel(Levels.Basket);
+
+    await ToSignal(GetTree(), "physics_frame");
+
+    ChangeLevel((Levels)_saveManager.Save["LastLevel"]);
   }
 
   private async void ChangeLevel(Levels level)

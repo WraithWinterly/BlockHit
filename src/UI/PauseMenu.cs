@@ -7,7 +7,6 @@ public class PauseMenu : Control
   private VBoxContainer _vBox;
   private Button _continueButton;
   private Button _returnToMenuButton;
-  private Button _quitButton;
 
   public override void _Ready()
   {
@@ -16,11 +15,9 @@ public class PauseMenu : Control
     _vBox = GetNode<VBoxContainer>("CenterContainer/VBoxContainer");
     _continueButton = GetNode<Button>("CenterContainer/VBoxContainer/Continue");
     _returnToMenuButton = GetNode<Button>("CenterContainer/VBoxContainer/ReturnToMenu");
-    _quitButton = GetNode<Button>("CenterContainer/VBoxContainer/Quit");
 
     _continueButton.Connect("pressed", this, nameof(OnContinuePressed));
     _returnToMenuButton.Connect("pressed", this, nameof(OnReturnToMenuPressed));
-    _quitButton.Connect("pressed", this, nameof(OnQuitPressed));
     Hide();
   }
 
@@ -73,10 +70,5 @@ public class PauseMenu : Control
     _events.EmitSignal(nameof(Events.ReturnedToMenu));
     await ToSignal(_events, nameof(Events.FadePlayerFaded));
     Hide();
-  }
-
-  private void OnQuitPressed()
-  {
-    GetTree().Quit();
   }
 }

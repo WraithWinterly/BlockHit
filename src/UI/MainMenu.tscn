@@ -97,7 +97,6 @@ anims/RESET = SubResource( 9 )
 
 [node name="MainMenuTrack" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
-autoplay = true
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_top = 0.25
@@ -135,9 +134,9 @@ custom_styles/normal = ExtResource( 3 )
 text = "Quit"
 
 [node name="LevelSelector" type="Control" parent="."]
-anchor_top = 0.085
+anchor_top = 0.17
 anchor_right = 0.3
-anchor_bottom = 0.462
+anchor_bottom = 0.55
 script = ExtResource( 14 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LevelSelector"]
@@ -150,7 +149,7 @@ custom_constants/separation = 100
 margin_right = 376.0
 
 [node name="Button" type="Button" parent="LevelSelector/VBoxContainer/Basket"]
-margin_right = 300.0
+margin_right = 375.0
 margin_bottom = 65.0
 custom_styles/hover = ExtResource( 12 )
 custom_styles/pressed = ExtResource( 13 )
@@ -185,7 +184,7 @@ margin_right = 376.0
 margin_bottom = 100.0
 
 [node name="Button" type="Button" parent="LevelSelector/VBoxContainer/Solid"]
-margin_right = 300.0
+margin_right = 375.0
 margin_bottom = 65.0
 custom_styles/hover = ExtResource( 12 )
 custom_styles/pressed = ExtResource( 13 )
@@ -220,7 +219,7 @@ margin_right = 376.0
 margin_bottom = 200.0
 
 [node name="Button" type="Button" parent="LevelSelector/VBoxContainer/Block"]
-margin_right = 300.0
+margin_right = 375.0
 margin_bottom = 65.0
 custom_styles/hover = ExtResource( 12 )
 custom_styles/pressed = ExtResource( 13 )

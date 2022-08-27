@@ -25,6 +25,8 @@ public class MainMenu : Control
     _quitButton.Connect("pressed", this, nameof(OnQuitPressed));
 
     _playButton.GrabFocus();
+
+    _mainMenuTrack.Play();
   }
 
   private void OnPlayPressed()
