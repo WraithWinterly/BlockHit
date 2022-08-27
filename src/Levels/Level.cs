@@ -4,7 +4,7 @@ using System;
 public class Level : Node2D
 {
   [Export] public AudioStream musicStream;
-  [Export] public int Seed = 10;
+  [Export] public ulong Seed = 10;
 
   public AudioStreamPlayer _levelTrack;
   public Vector2 SpawnTopLeft = new Vector2();

@@ -40,19 +40,21 @@ public class Spawner : Node2D
     _timer = GetNode<Timer>("Timer");
     _timer.Connect("timeout", this, nameof(OnTimerTimeout));
 
+    _rng.Seed = (Owner as Level).Seed;
+
     switch (_levelSpeed)
     {
       case LevelSpeed.Slow:
-        _waitTimeMin = 0.4f;
-        _waitTimeMax = 1f;
+        _waitTimeMin = 0.8f;
+        _waitTimeMax = 1.6f;
         break;
       case LevelSpeed.Normal:
-        _waitTimeMin = 0.2f;
-        _waitTimeMax = 0.8f;
+        _waitTimeMin = 0.4f;
+        _waitTimeMax = 1.2f;
         break;
       case LevelSpeed.Fast:
-        _waitTimeMin = 0.1f;
-        _waitTimeMax = 0.6f;
+        _waitTimeMin = 0.2f;
+        _waitTimeMax = 0.8f;
         break;
     }
 
@@ -78,18 +80,57 @@ public class Spawner : Node2D
 
   private void LevelStarted()
   {
-    _timer.Start(0);
+    _timer.Start(0.1f);
   }
 
   private void SpawnObjects()
   {
     foreach (PackedScene spawner in _spawners)
     {
-      int electedSpawner = (int)(GD.Randi() % _spawners.Count);
+      int electedSpawner;
+
+      if (_spawners.Count == 2)
+      {
+        GD.Print("double chance algo");
+        int chance = _rng.RandiRange(0, 100);
+        if (chance <= 80)
+        {
+          electedSpawner = 0;
+        }
+        else
+        {
+          electedSpawner = 1;
+        }
+      }
+      else if (_spawners.Count == 4)
+      {
+        int chance = _rng.RandiRange(0, 100);
+        if (chance <= 40)
+        {
+          electedSpawner = 0;
+        }
+        else if (chance <= 60)
+        {
+          electedSpawner = 1;
+        }
+        else if (chance <= 80)
+        {
+          electedSpawner = 2;
+        }
+        else
+        {
+          electedSpawner = 3;
+        }
+      }
+      else
+      {
+        electedSpawner = _rng.RandiRange(0, _spawners.Count - 1);
+      }
+
       Node2D _spawnObject = (Node2D)_spawners[electedSpawner].Instance();
       _spawnNode.AddChild(_spawnObject);
 
-      int dir = (int)(GD.Randi() % 2);
+      int dir = _rng.RandiRange(0, 1);
 
       ObjectBase rigidBody = _spawnObject.GetNode<ObjectBase>("ObjectBase");
 
