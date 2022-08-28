@@ -12,10 +12,11 @@ config_version=4
 
 config/name="BlockHit"
 run/main_scene="res://src/Main.tscn"
-boot_splash/image="res://Assets/Pixel.png"
+boot_splash/image="res://Logo.png"
 boot_splash/use_filter=false
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://Assets/Powerups/HealthBoost.png"
+config/windows_native_icon="res://Logo.ico"
 
 [display]
 
