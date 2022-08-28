@@ -49,12 +49,12 @@ public class Spawner : Node2D
         _waitTimeMax = 1.6f;
         break;
       case LevelSpeed.Normal:
-        _waitTimeMin = 0.4f;
-        _waitTimeMax = 1.2f;
+        _waitTimeMin = 0.8f;
+        _waitTimeMax = 1.4f;
         break;
       case LevelSpeed.Fast:
-        _waitTimeMin = 0.2f;
-        _waitTimeMax = 0.8f;
+        _waitTimeMin = 0.5f;
+        _waitTimeMax = 1f;
         break;
     }
 

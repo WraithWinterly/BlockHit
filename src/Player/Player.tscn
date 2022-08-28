@@ -228,3 +228,4 @@ volume_db = -10.0
 
 [node name="CompleteSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+volume_db = -10.0
