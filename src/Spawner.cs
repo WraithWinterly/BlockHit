@@ -104,21 +104,30 @@ public class Spawner : Node2D
       else if (_spawners.Count == 4)
       {
         int chance = _rng.RandiRange(0, 100);
-        if (chance <= 40)
+        if (chance <= 60)
         {
-          electedSpawner = 0;
-        }
-        else if (chance <= 60)
-        {
-          electedSpawner = 1;
-        }
-        else if (chance <= 80)
-        {
-          electedSpawner = 2;
+          // spawn enemy
+          int schance = _rng.RandiRange(0, 100);
+          if (schance <= 60)
+          {
+            electedSpawner = 0;
+          }
+          else
+          {
+            electedSpawner = 1;
+          }
         }
         else
         {
-          electedSpawner = 3;
+          int schance = _rng.RandiRange(0, 100);
+          if (schance <= 80)
+          {
+            electedSpawner = 2;
+          }
+          else
+          {
+            electedSpawner = 3;
+          }
         }
       }
       else

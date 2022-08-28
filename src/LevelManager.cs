@@ -26,11 +26,7 @@ public class LevelManager : Node
 
     _events.Connect(nameof(Events.LevelSelectorChanged), this, nameof(ChangeLevel));
 
-    // preload all levels
-    foreach (Levels level in Enum.GetValues(typeof(Levels)))
-    {
-      GD.Load($"res://src/levels/{level.ToString()}.tscn");
-    }
+    LoadLevels();
 
     await ToSignal(GetTree(), "physics_frame");
 
@@ -65,5 +61,13 @@ public class LevelManager : Node
   {
     await ToSignal(_events, nameof(Events.FadePlayerFaded));
     ChangeLevel(_level);
+  }
+
+  private void LoadLevels()
+  {
+    foreach (Levels level in Enum.GetValues(typeof(Levels)))
+    {
+      GD.Load($"res://src/levels/{level.ToString()}.tscn");
+    }
   }
 }

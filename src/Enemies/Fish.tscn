@@ -6,8 +6,7 @@
 [node name="Fish" type="Node2D"]
 
 [node name="ObjectBase" parent="." instance=ExtResource( 1 )]
-gravity_scale = 0.0
-color = Color( 1, 0, 0, 1 )
+color = Color( 1, 0.701961, 0, 1 )
 
 [node name="Sound" parent="ObjectBase" index="3"]
 stream = ExtResource( 2 )

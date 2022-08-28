@@ -7,6 +7,9 @@ public class FadePlayer : CanvasLayer
 
   private AnimationPlayer _anim;
 
+  private Label blockHitLabel;
+  private Label loadingLabel;
+
   public override void _EnterTree()
   {
     base._EnterTree();
@@ -20,13 +23,19 @@ public class FadePlayer : CanvasLayer
     _anim = GetNode<AnimationPlayer>("TextureRect/AnimationPlayer");
     _anim.Connect("animation_finished", this, nameof(OnAnimationFinished));
 
-    _events.Connect(nameof(Events.LevelReset), this, nameof(Transition));
-    _events.Connect(nameof(Events.ReturnedToMenu), this, nameof(Transition));
+    blockHitLabel = GetNode<Label>("TextureRect/BlockHitLabel");
+    loadingLabel = GetNode<Label>("TextureRect/LoadingLabel");
+
+    _events.Connect(nameof(Events.LevelReset), this, nameof(OnLevelReset));
+    _events.Connect(nameof(Events.ReturnedToMenu), this, nameof(OnReturnedToMenu));
     InitialTransition();
   }
 
-  public async void Transition()
+  public async void Transition(bool showText = true)
   {
+    blockHitLabel.Visible = showText;
+    loadingLabel.Visible = showText;
+
     Main.InTransition = true;
     GetTree().Paused = true;
     _anim.PlayBackwards("Fade");
@@ -39,10 +48,23 @@ public class FadePlayer : CanvasLayer
 
   private async void InitialTransition()
   {
+    blockHitLabel.Visible = false;
+    loadingLabel.Visible = false;
+
     GetTree().Paused = true;
     _anim.Play("Fade");
     await ToSignal(_events, nameof(Events.FadePlayerFaded));
     GetTree().Paused = false;
+  }
+
+  private void OnReturnedToMenu()
+  {
+    Transition();
+  }
+
+  private void OnLevelReset()
+  {
+    Transition(showText: false);
   }
 
   private void OnAnimationFinished(String animName)

@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/ObjectBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Powerups/HealthBoost.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Powerups/HealthBoost.wav" type="AudioStream" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 8 )
 
 [node name="HealthBoost" type="Node2D"]
 
@@ -14,6 +20,12 @@ _bounces = true
 
 [node name="Sprite" parent="ObjectBase" index="0"]
 texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="ObjectBase" index="1"]
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" parent="ObjectBase/Area2D" index="0"]
+shape = SubResource( 2 )
 
 [node name="Sound" parent="ObjectBase" index="3"]
 stream = ExtResource( 3 )

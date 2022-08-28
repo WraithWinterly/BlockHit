@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/ObjectBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Enemies/Fish.wav" type="AudioStream" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 4.0
+height = 6.00001
+
+[node name="FastFish" type="Node2D"]
+
+[node name="ObjectBase" parent="." instance=ExtResource( 1 )]
+color = Color( 0.827451, 0, 0.796078, 1 )
+_speedMax = 3.0
+_speedMin = 2.0
+_enemyDamage = 40
+
+[node name="CollisionShape2D" parent="ObjectBase" index="1"]
+shape = SubResource( 1 )
+
+[node name="Sound" parent="ObjectBase" index="3"]
+stream = ExtResource( 2 )
+pitch_scale = 1.72
+
+[editable path="ObjectBase"]

@@ -35,6 +35,7 @@ public class LevelSelector : Control
     _blockButton.Connect("pressed", this, nameof(OnBlockButtonPressed));
 
     await ToSignal(GetTree(), "physics_frame");
+    await ToSignal(GetTree(), "physics_frame");
 
     UpdateText();
   }
@@ -53,24 +54,42 @@ public class LevelSelector : Control
     {
       _blockLabel.Text = $"Block: {_saveManager.Save["HighScoreBlock"]}";
     }
+    _basketLabel.Modulate = _levelManager.CurrentLevel == LevelManager.Levels.Basket ? Colors.Purple : Colors.White;
+    _solidLabel.Modulate = _levelManager.CurrentLevel == LevelManager.Levels.Solid ? Colors.Purple : Colors.White;
+    _blockLabel.Modulate = _levelManager.CurrentLevel == LevelManager.Levels.Block ? Colors.Purple : Colors.White;
   }
 
-  private void OnBasketButtonPressed()
+  private async void OnBasketButtonPressed()
   {
     if (_levelManager.CurrentLevel != LevelManager.Levels.Basket)
+    {
       _events.EmitSignal(nameof(Events.LevelSelectorChanged), LevelManager.Levels.Basket);
+    }
+    await ToSignal(GetTree(), "physics_frame");
+    await ToSignal(GetTree(), "physics_frame");
+    UpdateText();
   }
 
-  private void OnSolidButtonPressed()
+  private async void OnSolidButtonPressed()
   {
     if (_levelManager.CurrentLevel != LevelManager.Levels.Solid)
+    {
       _events.EmitSignal(nameof(Events.LevelSelectorChanged), LevelManager.Levels.Solid);
+    }
+    await ToSignal(GetTree(), "physics_frame");
+    await ToSignal(GetTree(), "physics_frame");
+    UpdateText();
   }
 
-  private void OnBlockButtonPressed()
+  private async void OnBlockButtonPressed()
   {
     if (_levelManager.CurrentLevel != LevelManager.Levels.Block)
+    {
       _events.EmitSignal(nameof(Events.LevelSelectorChanged), LevelManager.Levels.Block);
+    }
+    await ToSignal(GetTree(), "physics_frame");
+    await ToSignal(GetTree(), "physics_frame");
+    UpdateText();
   }
 
 
