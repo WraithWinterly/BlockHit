@@ -1,15 +1,14 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/Player/PlayerLayer2.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Player/Player.png" type="Texture" id=2]
 [ext_resource path="res://src/Player/PlayerController.cs" type="Script" id=3]
-[ext_resource path="res://Assets/Player/Score.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Player/Score.ogg" type="AudioStream" id=4]
 [ext_resource path="res://src/Player/Player.cs" type="Script" id=5]
-[ext_resource path="res://Assets/Player/Hurt.wav" type="AudioStream" id=6]
-[ext_resource path="res://Assets/Player/Death.wav" type="AudioStream" id=7]
+[ext_resource path="res://Assets/Player/Hurt.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Assets/Player/CompleteSound.ogg" type="AudioStream" id=7]
 [ext_resource path="res://src/ScoreLight.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Assets/Powerups/HealthBoost.wav" type="AudioStream" id=9]
-[ext_resource path="res://Assets/Player/CompleteSound.wav" type="AudioStream" id=10]
+[ext_resource path="res://Assets/Player/Death.ogg" type="AudioStream" id=9]
 
 [sub_resource type="Animation" id=13]
 resource_name = "Complete"
@@ -220,17 +219,12 @@ stream = ExtResource( 4 )
 volume_db = -6.0
 mix_target = 1
 
-[node name="PowerupSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
-volume_db = -6.0
-mix_target = 1
-
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
+stream = ExtResource( 9 )
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -10.0
 
 [node name="CompleteSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 10 )
+stream = ExtResource( 7 )

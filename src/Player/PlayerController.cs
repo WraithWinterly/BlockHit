@@ -95,7 +95,8 @@ public class PlayerController : KinematicBody2D
   public override void _Input(InputEvent @event)
   {
     base._Input(@event);
-    if (@event.IsActionPressed("Jump"))
+
+    if (@event.IsActionPressed("Jump") || @event is InputEventScreenTouch)
     {
       if (_canChangeDir)
       {

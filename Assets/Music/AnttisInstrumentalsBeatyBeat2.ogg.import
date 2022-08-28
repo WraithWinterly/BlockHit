@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/AnttisInstrumentalsBeatyBeat2.ogg-62576022eda89ccdfab95a84ed312677.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/AnttisInstrumentalsBeatyBeat2.ogg"
+dest_files=[ "res://.import/AnttisInstrumentalsBeatyBeat2.ogg-62576022eda89ccdfab95a84ed312677.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

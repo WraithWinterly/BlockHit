@@ -33,6 +33,15 @@ public class LevelManager : Node
     ChangeLevel((Levels)_saveManager.Save["LastLevel"]);
   }
 
+  public override void _PhysicsProcess(float delta)
+  {
+    base._PhysicsProcess(delta);
+    while (GetChildCount() > 1)
+    {
+      GetChild(0).QueueFree();
+    }
+  }
+
   private async void ChangeLevel(Levels level)
   {
     var levelLoad = GD.Load($"res://src/Levels/{level.ToString()}.tscn") as PackedScene;
