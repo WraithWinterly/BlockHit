@@ -35,7 +35,7 @@ public class LevelManager : Node
 
   private async void ChangeLevel(Levels level)
   {
-    var levelLoad = GD.Load($"res://src/levels/{level.ToString()}.tscn") as PackedScene;
+    var levelLoad = GD.Load($"res://src/Levels/{level.ToString()}.tscn") as PackedScene;
     if (GetChildCount() > 0)
     {
       foreach (Node2D child in GetChildren())
