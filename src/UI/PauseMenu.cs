@@ -88,6 +88,7 @@ public class PauseMenu : Control
 
   private void OnPauseButtonPressed()
   {
+    GetTree().SetInputAsHandled();
     TogglePause();
   }
 
