@@ -26,19 +26,16 @@ public class LevelManager : Node
 
     _events.Connect(nameof(Events.LevelSelectorChanged), this, nameof(ChangeLevel));
 
-    LoadLevels();
-
-    await ToSignal(GetTree(), "physics_frame");
-
     ChangeLevel((Levels)_saveManager.Save["LastLevel"]);
   }
 
-  public override void _PhysicsProcess(float delta)
+  public override async void _PhysicsProcess(float delta)
   {
     base._PhysicsProcess(delta);
     while (GetChildCount() > 1)
     {
       GetChild(0).QueueFree();
+      await ToSignal(GetTree(), "physics_frame");
     }
   }
 
@@ -70,13 +67,5 @@ public class LevelManager : Node
   {
     await ToSignal(_events, nameof(Events.FadePlayerFaded));
     ChangeLevel(_level);
-  }
-
-  private void LoadLevels()
-  {
-    foreach (Levels level in Enum.GetValues(typeof(Levels)))
-    {
-      GD.Load($"res://src/levels/{level.ToString()}.tscn");
-    }
   }
 }
