@@ -1,7 +1,9 @@
 # BlockHit
 
+**Play the game here! https://wraithwinterly.itch.io/blockhit**
+
 Challenge your reflexes by scoring the highest possible while dodging objects and strategically managing your health status, play in 3 levels for the highest score. This game is made with Godot Engine and C# and is open source.
-- Made in a few days
+Made in a few days.
 
 # License
 This project is open source under the [MIT License](https://github.com/WraithWinterly/BlockHit/blob/main/LICENSE).
