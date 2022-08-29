@@ -9,6 +9,7 @@
 [ext_resource path="res://src/Powerups/HealthBoost.tscn" type="PackedScene" id=7]
 
 [node name="Basket" type="Node2D"]
+pause_mode = 1
 script = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
@@ -46,4 +47,5 @@ wait_time = 20.0
 one_shot = true
 
 [node name="LevelTrack" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
 stream = ExtResource( 1 )

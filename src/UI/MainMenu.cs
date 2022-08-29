@@ -25,6 +25,10 @@ public class MainMenu : Control
     _quitButton.Connect("pressed", this, nameof(OnQuitPressed));
 
     _playButton.GrabFocus();
+    if (OS.GetName() == "HTML5")
+    {
+      _quitButton.Hide();
+    }
   }
 
   private void OnPlayPressed()

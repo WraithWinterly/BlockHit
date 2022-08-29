@@ -11,6 +11,7 @@
 [ext_resource path="res://src/Enemies/FastFish.tscn" type="PackedScene" id=9]
 
 [node name="Solid" type="Node2D"]
+pause_mode = 1
 script = ExtResource( 3 )
 Seed = 5828
 
@@ -52,4 +53,5 @@ position = Vector2( -64, 48 )
 position = Vector2( 464, 160 )
 
 [node name="LevelTrack" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
 stream = ExtResource( 2 )

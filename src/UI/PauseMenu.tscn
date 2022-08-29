@@ -1,28 +1,33 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/UI/PauseMenu.cs" type="Script" id=1]
 [ext_resource path="res://Assets/UI/font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Assets/UI/ButtonHover.tres" type="StyleBox" id=3]
 [ext_resource path="res://Assets/UI/ButtonPressed.tres" type="StyleBox" id=4]
 [ext_resource path="res://Assets/UI/Button.tres" type="StyleBox" id=5]
+[ext_resource path="res://Assets/UI/PauseIcon.png" type="Texture" id=6]
 
-[node name="PauseMenu" type="Control"]
+[node name="PauseSystem" type="Control"]
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="PauseMenu" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color( 0, 0, 0, 0.0980392 )
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="PauseMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/CenterContainer"]
 margin_left = 363.0
 margin_top = 261.0
 margin_right = 917.0
@@ -30,7 +35,7 @@ margin_bottom = 458.0
 custom_constants/separation = 15
 alignment = 1
 
-[node name="Continue" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="Continue" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer"]
 margin_right = 554.0
 margin_bottom = 91.0
 custom_fonts/font = ExtResource( 2 )
@@ -41,7 +46,7 @@ custom_styles/disabled = ExtResource( 5 )
 custom_styles/normal = ExtResource( 5 )
 text = "Continue"
 
-[node name="ReturnToMenu" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="ReturnToMenu" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer"]
 margin_top = 106.0
 margin_right = 554.0
 margin_bottom = 197.0
@@ -52,3 +57,13 @@ custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 5 )
 custom_styles/normal = ExtResource( 5 )
 text = "Return to Menu"
+
+[node name="PauseButton" type="TextureButton" parent="."]
+margin_left = 55.0
+margin_top = 15.0
+rect_scale = Vector2( 4, 4 )
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 6 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 6 )

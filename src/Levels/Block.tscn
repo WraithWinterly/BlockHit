@@ -11,6 +11,7 @@
 [ext_resource path="res://src/Enemies/Fish.tscn" type="PackedScene" id=9]
 
 [node name="Block" type="Node2D"]
+pause_mode = 1
 script = ExtResource( 3 )
 Seed = 40
 
@@ -51,4 +52,5 @@ wait_time = 20.0
 one_shot = true
 
 [node name="LevelTrack" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
 stream = ExtResource( 2 )
